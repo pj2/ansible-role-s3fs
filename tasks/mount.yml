@@ -32,9 +32,10 @@
   command: "update-rc.d s3fs defaults"
   changed_when: False
 
-- name: Make sure mountpoints are present in fstab
+- name: Make sure mountpoints are present in fstab and mounted
   become: yes
   mount:
+    ensure: mounted
     name: "{{ item.mountpoint }}"
     src: "s3fs#{{ item.bucket }}"
     fstype: fuse
